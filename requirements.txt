@@ -1,0 +1,2 @@
+aws-glue-libs @ git+https://github.com/awslabs/aws-glue-libs@v4.0
+pyspark ~=3.4.1
