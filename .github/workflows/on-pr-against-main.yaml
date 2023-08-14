@@ -31,4 +31,4 @@ jobs:
         run: black --check ./src
 
       - name: Run Flake8 linter
-        run: black --check ./src
+        run: flake8 ./src
