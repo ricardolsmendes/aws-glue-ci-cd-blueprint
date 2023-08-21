@@ -1,4 +1,4 @@
-# This workflow will install dependencies and run style check with a variety of Python
+# This workflow will install dependencies, run tests and style checks with a variety of Python
 # versions.
 
 name: on PR against main

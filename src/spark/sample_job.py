@@ -17,7 +17,7 @@ class SampleJob:
         self._glue_job.init(args["JOB_NAME"], args)
 
     def run(self) -> None:
-        self._read_json("TBD")
+        self._read_json("TBD")  # TODO: Read S3 path from the job parameters.
         self._glue_job.commit()
 
     def _read_json(self, path) -> Any:
