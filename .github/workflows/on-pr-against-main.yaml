@@ -27,8 +27,17 @@ jobs:
           python -m pip install -r requirements.txt
           python -m pip install -r requirements-dev.txt
 
+      - name: Run unit tests with pytest
+        run: pytest
+
+      - name: Comment unit test coverage
+        uses: MishaKav/pytest-coverage-comment@v1.1.43
+        with:
+          junitxml-path: ./pytest-junit.xml
+          pytest-xml-coverage-path: ./coverage.xml
+
       - name: Run Black style check on source code
-        run: black --check ./src
+        run: black --check ./src ./tests
 
       - name: Run Flake8 linter
-        run: flake8 ./src
+        run: flake8 ./src ./tests
