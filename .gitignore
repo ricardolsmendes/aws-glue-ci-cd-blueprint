@@ -157,5 +157,8 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
-# Mac stuff
+# asdf settings
+.tool-versions
+
+# macOS Desktop Services Store settings
 .DS_Store
