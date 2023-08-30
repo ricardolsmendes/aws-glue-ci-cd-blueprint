@@ -1,7 +1,7 @@
 # AWS Glue CI/CD Blueprint
 
-This repository contains a blueprint CI/CD pipeline for building, testing, and deploying data
-processing jobs in [AWS Glue](https://aws.amazon.com/glue/).
+This repository contains a blueprint CI/CD pipeline for building, testing, and deploying
+data processing jobs in [AWS Glue](https://aws.amazon.com/glue/).
 
 [![license](https://img.shields.io/github/license/ricardolsmendes/aws-glue-ci-cd-blueprint.svg)](https://github.com/ricardolsmendes/aws-glue-ci-cd-blueprint/blob/main/LICENSE)
 [![issues](https://img.shields.io/github/issues/ricardolsmendes/aws-glue-ci-cd-blueprint.svg)](https://github.com/ricardolsmendes/aws-glue-ci-cd-blueprint/issues)
