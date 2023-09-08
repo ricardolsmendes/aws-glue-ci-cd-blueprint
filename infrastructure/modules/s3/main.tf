@@ -18,7 +18,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "glue_assets_lifecycle" {
     status = "Enabled"
     id     = "Delete after 30 days"
     expiration {
-        days = 30
+      days = 30
     }
   }
 }
