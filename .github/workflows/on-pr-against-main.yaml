@@ -8,7 +8,7 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  python-test-and-style-check:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -41,3 +41,11 @@ jobs:
 
       - name: Run Flake8 linter
         run: flake8 ./src ./tests
+
+  terraform-style-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: hashicorp/setup-terraform@v2
+
+      - name: Terraform style check
+        run: terraform fmt -check -recursive ./infrastructure
