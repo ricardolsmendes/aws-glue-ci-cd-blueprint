@@ -10,3 +10,22 @@ data processing jobs in [AWS Glue](https://aws.amazon.com/glue/).
 <!-- Pytest Coverage Comment:Begin -->
 <a href="https://github.com/ricardolsmendes/aws-glue-ci-cd-blueprint/blob/main/README.md"><img alt="Coverage" src="https://img.shields.io/badge/Coverage-94%25-brightgreen.svg" /></a><details><summary>Coverage Report </summary><table><tr><th>File</th><th>Stmts</th><th>Miss</th><th>Cover</th><th>Missing</th></tr><tbody><tr><td colspan="5"><b>src/spark</b></td></tr><tr><td>&nbsp; &nbsp;<a href="https://github.com/ricardolsmendes/aws-glue-ci-cd-blueprint/blob/main/src/spark/sample_job.py">sample_job.py</a></td><td>17</td><td>1</td><td>94%</td><td><a href="https://github.com/ricardolsmendes/aws-glue-ci-cd-blueprint/blob/main/src/spark/sample_job.py#L32">32</a></td></tr><tr><td><b>TOTAL</b></td><td><b>17</b></td><td><b>1</b></td><td><b>94%</b></td><td>&nbsp;</td></tr></tbody></table></details>
 <!-- Pytest Coverage Comment:End -->
+
+## How to contribute
+
+Please make sure to take a moment and read the [Code of
+Conduct](https://github.com/ricardolsmendes/aws-glue-ci-cd-blueprint/blob/main/.github/CODE_OF_CONDUCT.md).
+
+### Report issues
+
+Please report bugs and suggest features via the [GitHub
+Issues](https://github.com/ricardolsmendes/aws-glue-ci-cd-blueprint/issues).
+
+Before opening an issue, search the tracker for possible duplicates. If you find a
+duplicate, please add a comment saying that you encountered the problem as well.
+
+### Contribute code
+
+Please make sure to read the [Contributing
+Guide](https://github.com/ricardolsmendes/aws-glue-ci-cd-blueprint/blob/main/.github/CONTRIBUTING.md)
+before making a pull request.
