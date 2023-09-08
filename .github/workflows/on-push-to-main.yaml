@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  python-test-and-style-check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
