@@ -1,4 +1,6 @@
-# This workflow will install dependencies, run tests and style checks with Python 3.10.
+# This workflow will:
+#   1. Install dependencies, run tests and style checks with Python 3.10.
+#   2. Run style checks for Terraform files.
 
 name: continuous integration
 
@@ -7,7 +9,7 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  python-test-and-style-check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -51,3 +53,13 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           message: "docs: update coverage on README.md"
+
+  terraform-style-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: hashicorp/setup-terraform@v2
+
+      - name: Terraform style check
+        run: terraform fmt -check -recursive ./infrastructure
