@@ -12,7 +12,7 @@ module "shared" {
 
 resource "aws_glue_job" "sample_spark_job" {
   name         = "${var.sample_spark_job_name}-${module.shared.environment}"
-  description  = "Sample Spark job from the AWS Glue CI/CD Blueprint"
+  description  = "Sample Spark job from the AWS Glue CI/CD Blueprint."
   glue_version = "4.0"
   role_arn     = module.iam.glue_service_role_arn
   command {

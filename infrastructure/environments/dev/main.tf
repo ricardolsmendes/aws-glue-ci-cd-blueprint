@@ -1,3 +1,3 @@
-module "aws_glue" {
+module "aws_glue_ci_cd_blueprint" {
   source = "../../modules/glue"
 }

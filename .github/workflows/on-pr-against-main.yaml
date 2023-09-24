@@ -44,12 +44,15 @@ jobs:
       - name: Run Flake8 linter
         run: flake8 ./src ./tests
 
-  terraform-style-check:
+  terraform-validation-and-style-check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
       - uses: hashicorp/setup-terraform@v2
+
+      - name: Terraform validation
+        run: terraform validate
 
       - name: Terraform style check
         run: terraform fmt -check -recursive ./infrastructure
