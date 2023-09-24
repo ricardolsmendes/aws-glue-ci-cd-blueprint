@@ -1,3 +1,3 @@
-module "aws_s3" {
-  source = "../../modules/s3"
+module "aws_glue_ci_cd_blueprint" {
+  source = "../../modules/glue"
 }
