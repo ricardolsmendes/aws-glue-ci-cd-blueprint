@@ -1,4 +1,9 @@
 terraform {
+  backend "s3" {
+    bucket = "aws-glue-ci-cd-blueprint-terraform"
+    key    = "state/qa"
+    region = "us-east-1"
+  }
   required_providers {
     aws = {
       source  = "hashicorp/aws"
