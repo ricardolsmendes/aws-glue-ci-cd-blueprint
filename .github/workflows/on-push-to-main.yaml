@@ -54,12 +54,15 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           message: "docs: update coverage on README.md"
 
-  terraform-style-check:
+  terraform-validation-and-style-check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
       - uses: hashicorp/setup-terraform@v2
+
+      - name: Terraform validation
+        run: terraform validate
 
       - name: Terraform style check
         run: terraform fmt -check -recursive ./infrastructure
