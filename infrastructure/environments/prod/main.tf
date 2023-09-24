@@ -1,3 +1,3 @@
-module "aws_s3" {
-  source = "../../modules/s3"
+module "aws_glue" {
+  source = "../../modules/glue"
 }
