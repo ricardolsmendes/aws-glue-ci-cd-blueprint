@@ -1,17 +1,15 @@
 module "iam" {
   source = "../iam"
+  environment = var.environment
 }
 
 module "s3" {
   source = "../s3"
-}
-
-module "shared" {
-  source = "../shared"
+  environment = var.environment
 }
 
 resource "aws_glue_job" "sample_spark_job" {
-  name              = "${var.sample_spark_job_name}-${module.shared.environment}"
+  name              = "${var.sample_spark_job_name}-${var.environment}"
   description       = "Sample Spark job from the AWS Glue CI/CD Blueprint."
   glue_version      = "4.0"
   role_arn          = module.iam.glue_service_role_arn
@@ -22,6 +20,6 @@ resource "aws_glue_job" "sample_spark_job" {
   }
   tags = {
     Project     = "AWS Glue CI/CD Blueprint"
-    Environment = module.shared.environment
+    Environment = var.environment
   }
 }

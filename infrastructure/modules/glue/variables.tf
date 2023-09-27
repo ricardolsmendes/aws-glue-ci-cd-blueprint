@@ -1,3 +1,9 @@
+variable "environment" {
+  description = "The deployment environment."
+  type        = string
+  default     = "dev"
+}
+
 variable "sample_spark_job_name" {
   description = "Name of the Glue job used to demonstrate Spark features."
   type        = string
