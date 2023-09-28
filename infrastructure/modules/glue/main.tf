@@ -1,10 +1,10 @@
 module "iam" {
-  source = "../iam"
+  source      = "../iam"
   environment = var.environment
 }
 
 module "s3" {
-  source = "../s3"
+  source      = "../s3"
   environment = var.environment
 }
 
