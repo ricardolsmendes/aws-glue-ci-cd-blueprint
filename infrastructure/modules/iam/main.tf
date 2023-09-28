@@ -1,9 +1,6 @@
 module "s3" {
-  source = "../s3"
-}
-
-module "shared" {
-  source = "../shared"
+  source      = "../s3"
+  environment = var.environment
 }
 
 data "aws_iam_policy_document" "glue_service_custom_policy" {
@@ -26,12 +23,12 @@ data "aws_iam_policy_document" "glue_service_custom_policy" {
 }
 
 resource "aws_iam_policy" "glue_service_custom_policy" {
-  name        = "AWSGlueCICDBlueprintGluePolicy-${module.shared.environment}"
+  name        = "AWSGlueCICDBlueprintGluePolicy-${var.environment}"
   description = "Provides access to the resources required by Glue jobs in the AWS Glue CI/CD Blueprint."
   policy      = data.aws_iam_policy_document.glue_service_custom_policy.json
   tags = {
     Project     = "AWS Glue CI/CD Blueprint"
-    Environment = module.shared.environment
+    Environment = var.environment
   }
 }
 
@@ -47,12 +44,12 @@ data "aws_iam_policy_document" "glue_service_trust_policy" {
 }
 
 resource "aws_iam_role" "glue_service_role" {
-  name               = "AWSGlueCICDBlueprintGlueServiceRole-${module.shared.environment}"
+  name               = "AWSGlueCICDBlueprintGlueServiceRole-${var.environment}"
   description        = "Used by Glue to demonstrate the AWS Glue CI/CD Blueprint."
   assume_role_policy = data.aws_iam_policy_document.glue_service_trust_policy.json
   tags = {
     Project     = "AWS Glue CI/CD Blueprint"
-    Environment = module.shared.environment
+    Environment = var.environment
   }
 }
 
