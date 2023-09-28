@@ -9,7 +9,3 @@ output "glue_assets_bucket_arn" {
 output "glue_scripts_bucket_arn" {
   value = aws_s3_bucket.glue_scripts.arn
 }
-
-output "glue_scripts_bucket_id" {
-  value = aws_s3_bucket.glue_scripts.id
-}

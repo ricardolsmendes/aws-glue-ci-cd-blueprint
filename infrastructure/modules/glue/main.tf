@@ -1,22 +1,20 @@
-module "iam" {
-  source      = "../iam"
-  environment = var.environment
+data "aws_iam_role" "glue_service" {
+  name = "AWSGlueCICDBlueprintGlueServiceRole-${var.environment}"
 }
 
-module "s3" {
-  source      = "../s3"
-  environment = var.environment
+data "aws_s3_bucket" "glue_scripts" {
+  bucket = "${var.glue_scripts_bucket_name}-${var.environment}"
 }
 
 resource "aws_glue_job" "sample_spark_job" {
   name              = "${var.sample_spark_job_name}-${var.environment}"
   description       = "Sample Spark job from the AWS Glue CI/CD Blueprint."
   glue_version      = "4.0"
-  role_arn          = module.iam.glue_service_role_arn
+  role_arn          = data.aws_iam_role.glue_service.arn
   worker_type       = "G.1X"
   number_of_workers = 10
   command {
-    script_location = module.s3.glue_scripts_bucket_id
+    script_location = data.aws_s3_bucket.glue_scripts.id
   }
   tags = {
     Project     = "AWS Glue CI/CD Blueprint"
