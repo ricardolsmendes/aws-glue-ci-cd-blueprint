@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket = "aws-glue-ci-cd-blueprint-terraform"
-    key    = "state/dev/prerequisites"
+    key    = "state/qa/prerequisites"
     region = "us-east-1"
   }
   required_providers {
