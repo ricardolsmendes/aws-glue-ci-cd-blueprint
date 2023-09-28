@@ -1,6 +1,10 @@
 module "s3" {
-  source      = "../s3"
-  environment = var.environment
+  source = "../s3"
+
+  environment              = var.environment
+  data_bucket_name         = var.data_bucket_name
+  glue_assets_bucket_name  = var.glue_assets_bucket_name
+  glue_scripts_bucket_name = var.glue_scripts_bucket_name
 }
 
 data "aws_iam_policy_document" "glue_service_custom_policy" {
