@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket = "aws-glue-ci-cd-blueprint-terraform"
-    key    = "state/prod/pipelines.tfstate"
+    key    = "state/prod.tfstate"
     region = "us-east-1"
   }
   required_providers {
@@ -12,7 +12,6 @@ terraform {
   }
 }
 
-# Configure the AWS Provider
 provider "aws" {
   access_key = var.aws_access_key
   secret_key = var.aws_secret_key
