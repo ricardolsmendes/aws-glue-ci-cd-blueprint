@@ -1,5 +1,5 @@
-module "aws_glue_ci_cd_blueprint_prerequisites" {
-  source = "../../../modules/iam"
+module "data_lake_core" {
+  source = "../../../modules/data-lake-core"
 
   environment              = var.environment
   data_bucket_name         = var.data_bucket_name

@@ -1,17 +1,8 @@
-module "s3" {
-  source = "../s3"
-
-  environment              = var.environment
-  data_bucket_name         = var.data_bucket_name
-  glue_assets_bucket_name  = var.glue_assets_bucket_name
-  glue_scripts_bucket_name = var.glue_scripts_bucket_name
-}
-
 data "aws_iam_policy_document" "glue_service_custom_policy" {
   statement {
     effect    = "Allow"
     actions   = ["s3:GetObject"]
-    resources = [module.s3.glue_scripts_bucket_arn]
+    resources = [aws_s3_bucket.glue_scripts.arn]
   }
   statement {
     effect = "Allow"
@@ -20,8 +11,8 @@ data "aws_iam_policy_document" "glue_service_custom_policy" {
       "s3:PutObject"
     ]
     resources = [
-      module.s3.data_bucket_arn,
-      module.s3.glue_assets_bucket_arn
+      aws_s3_bucket.data.arn,
+      aws_s3_bucket.glue_assets.arn
     ]
   }
 }
