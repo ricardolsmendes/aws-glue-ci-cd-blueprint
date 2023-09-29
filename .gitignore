@@ -164,5 +164,5 @@ cython_debug/
 .DS_Store
 
 # Terraform
-.terraform
+.terraform/
 .terraform-plan.out

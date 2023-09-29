@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket = "aws-glue-ci-cd-blueprint-terraform"
-    key    = "state/prod/pipelines"
+    key    = "state/prod/pipelines.tfstate"
     region = "us-east-1"
   }
   required_providers {

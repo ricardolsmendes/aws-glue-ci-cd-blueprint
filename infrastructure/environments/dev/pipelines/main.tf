@@ -1,5 +1,5 @@
-module "aws_glue_ci_cd_blueprint_prerequisites" {
-  source = "../../../modules/glue"
+module "pipelines" {
+  source = "../../../modules/pipelines"
 
   environment              = var.environment
   glue_scripts_bucket_name = var.glue_scripts_bucket_name
