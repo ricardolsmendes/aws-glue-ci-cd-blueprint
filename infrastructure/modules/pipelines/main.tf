@@ -1,9 +1,9 @@
 data "aws_iam_role" "glue_service" {
-  name = "AWSGlueCICDBlueprintGlueServiceRole-${var.environment}"
+  name = var.glue_service_role_id
 }
 
 data "aws_s3_bucket" "glue_scripts" {
-  bucket = "${var.glue_scripts_bucket_name}-${var.environment}"
+  bucket = var.glue_scripts_bucket_id
 }
 
 resource "aws_glue_job" "sample_spark_job" {

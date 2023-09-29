@@ -4,10 +4,16 @@ variable "environment" {
   default     = "dev"
 }
 
-variable "glue_scripts_bucket_name" {
-  description = "Name of the S3 bucket used to store AWS Glue scripts."
+variable "glue_scripts_bucket_id" {
+  description = "ID of the S3 bucket used to store AWS Glue scripts."
   type        = string
-  default     = "aws-glue-ci-cd-blueprint-glue-scripts"
+  default     = ""
+}
+
+variable "glue_service_role_id" {
+  description = "ID of the service role that will be attached to the AWS Glue jobs."
+  type        = string
+  default     = ""
 }
 
 variable "sample_spark_job_name" {
