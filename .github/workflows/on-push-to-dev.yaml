@@ -1,0 +1,68 @@
+# This workflow will:
+#   1. Install dependencies, run tests and style checks with Python 3.10.
+#   2. Run style checks for Terraform files.
+
+name: continuous integration
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  python-test-and-style-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Otherwise, it will fail to push refs to the destination repo.
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+          cache: "pip" # Caches pip dependencies.
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install -r requirements-dev.txt
+
+      - name: Run unit tests with pytest
+        # pytest-coverage.txt is required to properly report coverage in README.md.
+        run: pytest | tee ./pytest-coverage.txt
+
+      - name: Run Black style check on source code
+        run: black --check ./src ./tests
+
+      - name: Run Flake8 linter
+        run: flake8 ./src ./tests
+
+      - name: Generate unit test coverage report
+        id: report-coverage
+        uses: MishaKav/pytest-coverage-comment@v1.1.43
+        with:
+          hide-comment: true
+          junitxml-path: ./pytest-junit.xml
+
+      - name: Update README.md with coverage html
+        run: sed -i '/<!-- Pytest Coverage Comment:Begin -->/,/<!-- Pytest Coverage Comment:End -->/c\<!-- Pytest Coverage Comment:Begin -->\n\${{ steps.report-coverage.outputs.coverageHtml }}\n<!-- Pytest Coverage Comment:End -->' ./README.md
+
+      - name: Commit & Push changes to README.md
+        uses: actions-js/push@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          message: "docs: update coverage on README.md"
+
+  terraform-validation-and-style-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: hashicorp/setup-terraform@v2
+
+      - name: Terraform validation
+        run: terraform validate
+
+      - name: Terraform style check
+        run: terraform fmt -check -recursive ./infrastructure
