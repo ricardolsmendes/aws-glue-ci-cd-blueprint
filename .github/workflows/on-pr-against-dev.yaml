@@ -3,7 +3,7 @@
 #      versions.
 #   2. Run style checks for Terraform files.
 
-name: on PR against dev
+name: on PR against [dev]
 
 on:
   pull_request:
