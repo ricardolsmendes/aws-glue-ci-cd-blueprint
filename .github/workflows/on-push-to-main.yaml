@@ -2,7 +2,7 @@
 #   1. Install dependencies, run tests and style checks with Python 3.10.
 #   2. Run style checks for Terraform files.
 
-name: continuous integration
+name: on PUSH to [main]
 
 on:
   push:
