@@ -6,7 +6,7 @@ name: continuous integration
 
 on:
   push:
-    branches: [main]
+    branches: [dev]
 
 jobs:
   python-test-and-style-check:
