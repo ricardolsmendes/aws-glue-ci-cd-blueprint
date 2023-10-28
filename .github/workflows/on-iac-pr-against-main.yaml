@@ -2,7 +2,7 @@
 #           GitHub Actions configuration file for an AWS Glue ETL application           #
 #                                                                                       #
 # This workflow will:                                                                   #
-#   1. Validate and run style checks for Terraform files.                               #
+#   1. Create AWS resources for the QA environment using Terraform.                     #
 # ===================================================================================== #
 
 name: on IaC PR against [main]
@@ -17,14 +17,20 @@ on:
 jobs:
 
 # ===================================================================================== #
-#                         TERRAFORM VALIDATION AND STYLE CHECK                          #
+#                    CREATE THE AWS RESOURCES FOR THE QA ENVIRONMENT                    #
 # ===================================================================================== #
-  terraform-validation-and-style-check:
+  terraform-qa-infrastructure:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: hashicorp/setup-terraform@v2
-      - name: Terraform validation
-        run: terraform validate ./infrastructure
       - name: Terraform style check
         run: terraform fmt -check -recursive ./infrastructure
+      - name: Terraform validate
+        run: terraform validate ./infrastructure
+      - name: Terraform init
+        run: terraform init ./infrastructure/qa
+      - name: Terraform plan
+        run: terraform plan ./infrastructure/qa
+      - name: Terraform apply
+        run: terraform apply -input=false ./infrastructure/qa
