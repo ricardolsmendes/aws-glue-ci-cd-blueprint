@@ -29,8 +29,8 @@ jobs:
       - name: Terraform validate
         run: terraform -chdir=./infrastructure validate
       - name: Terraform init
-        run: terraform -chdir=./infrastructure/qa init
+        run: terraform -chdir=./infrastructure/environments/qa init
       - name: Terraform plan
-        run: terraform -chdir=./infrastructure/qa plan
+        run: terraform -chdir=./infrastructure/environments/qa plan
       - name: Terraform apply
-        run: terraform -chdir=./infrastructure/qa -input=false apply
+        run: terraform -chdir=./infrastructure/environments/qa -input=false apply

@@ -29,8 +29,8 @@ jobs:
       - name: Terraform validate
         run: terraform -chdir=./infrastructure validate
       - name: Terraform init
-        run: terraform -chdir=./infrastructure/production init
+        run: terraform -chdir=./infrastructure/environments/production init
       - name: Terraform plan
-        run: terraform -chdir=./infrastructure/production plan
+        run: terraform -chdir=./infrastructure/environments/production plan
       - name: Terraform apply
-        run: terraform -chdir=./infrastructure/production -input=false apply
+        run: terraform -chdir=./infrastructure/environments/production -input=false apply
