@@ -10,7 +10,9 @@ name: on IaC PR against [dev]
 on:
   pull_request:
     branches: [dev]
-    paths: ["infrastructure/**"]
+    paths:
+      - "infrastructure/**"
+      - '.github/workflows/**'
 
 jobs:
 

@@ -10,7 +10,9 @@ name: on IaC PUSH to [main]
 on:
   push:
     branches: [main]
-    paths: ["infrastructure/**"]
+    paths:
+      - "infrastructure/**"
+      - '.github/workflows/**'
 
 jobs:
 
