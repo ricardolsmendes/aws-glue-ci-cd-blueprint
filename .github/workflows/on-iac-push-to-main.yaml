@@ -3,6 +3,7 @@
 #                                                                                       #
 # This workflow will:                                                                   #
 #   1. Validate and run style checks for Terraform files.                               #
+#   2. Create AWS resources for the production environment using Terraform.             #
 # ===================================================================================== #
 
 name: on IaC PUSH to [main]
@@ -28,3 +29,20 @@ jobs:
         run: terraform validate ./infrastructure
       - name: Terraform style check
         run: terraform fmt -check -recursive ./infrastructure
+
+# ===================================================================================== #
+#               CREATE THE AWS RESOURCES FOR THE PRODUCTION ENVIRONMENT                 #
+# ===================================================================================== #
+  terraform-qa-infrastructure:
+    needs:
+      - terraform-validation-and-style-check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: hashicorp/setup-terraform@v2
+      - name: Terraform init
+        run: terraform init ./infrastructure/production
+      - name: Terraform plan
+        run: terraform plan ./infrastructure/production
+      - name: Terraform apply
+        run: terraform apply -input=false ./infrastructure/production
