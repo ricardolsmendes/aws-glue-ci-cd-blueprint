@@ -1,13 +1,13 @@
 # This workflow will:
 #   1. Install dependencies, run tests and style checks with a variety of Python
 #      versions.
-#   2. Run style checks for Terraform files.
 
 name: on PR against [dev]
 
 on:
   pull_request:
     branches: [dev]
+    paths-ignore: ["infrastructure/**"]
 
 jobs:
   python-test-and-style-check:
@@ -43,16 +43,3 @@ jobs:
 
       - name: Run Flake8 linter
         run: flake8 ./src ./tests
-
-  terraform-validation-and-style-check:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: hashicorp/setup-terraform@v2
-
-      - name: Terraform validation
-        run: terraform validate
-
-      - name: Terraform style check
-        run: terraform fmt -check -recursive ./infrastructure
