@@ -27,10 +27,10 @@ jobs:
       - name: Terraform style check
         run: terraform fmt -check -recursive ./infrastructure
       - name: Terraform validate
-        run: terraform validate ./infrastructure
+        run: terraform -chdir ./infrastructure validate
       - name: Terraform init
-        run: terraform init ./infrastructure/staging
+        run: terraform -chdir ./infrastructure/staging init
       - name: Terraform plan
-        run: terraform plan ./infrastructure/staging
+        run: terraform -chdir ./infrastructure/staging plan
       - name: Terraform apply
-        run: terraform apply -input=false ./infrastructure/staging
+        run: terraform -chdir ./infrastructure/staging -input=false apply
