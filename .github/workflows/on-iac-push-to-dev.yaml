@@ -41,4 +41,4 @@ jobs:
       - name: Terraform plan
         run: terraform -chdir=./infrastructure/environments/staging plan
       - name: Terraform apply
-        run: terraform -chdir=./infrastructure/environments/staging -input=false apply
+        run: terraform -chdir=./infrastructure/environments/staging apply -input=false
