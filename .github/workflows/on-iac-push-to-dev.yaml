@@ -37,8 +37,8 @@ jobs:
       - name: Terraform validate
         run: terraform -chdir=./infrastructure validate
       - name: Terraform init
-        run: terraform -chdir=./infrastructure/environments/staging init
+        run: terraform -chdir=./infrastructure/environments/staging init -input=false
       - name: Terraform plan
-        run: terraform -chdir=./infrastructure/environments/staging plan
+        run: terraform -chdir=./infrastructure/environments/staging plan -input=false
       - name: Terraform apply
-        run: terraform -chdir=./infrastructure/environments/staging apply -input=false
+        run: terraform -chdir=./infrastructure/environments/staging apply -input=false -auto-approve
