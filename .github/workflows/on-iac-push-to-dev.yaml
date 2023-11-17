@@ -2,7 +2,7 @@
 #           GitHub Actions configuration file for an AWS Glue ETL application           #
 #                                                                                       #
 # This workflow will:                                                                   #
-#   1. Validate and run style checks for Terraform files.                               #
+#   1. Create AWS resources for the staging environment using Terraform.                #
 # ===================================================================================== #
 
 name: on IaC PUSH to [dev]
@@ -17,14 +17,28 @@ on:
 jobs:
 
 # ===================================================================================== #
-#                         TERRAFORM VALIDATION AND STYLE CHECK                          #
+#                 CREATE THE AWS RESOURCES FOR THE STAGING ENVIRONMENT                  #
 # ===================================================================================== #
-  terraform-validation-and-style-check:
+  terraform-staging-infrastructure:
     runs-on: ubuntu-latest
+    environment: staging
+    permissions:
+      id-token: write # This is required for requesting the JWT
     steps:
       - uses: actions/checkout@v3
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/AWSGlueCICDBlueprintGitHubActionsServiceRole
+          aws-region: ${{ vars.AWS_REGION }}
       - uses: hashicorp/setup-terraform@v2
-      - name: Terraform validation
-        run: terraform validate ./infrastructure
       - name: Terraform style check
         run: terraform fmt -check -recursive ./infrastructure
+      - name: Terraform validate
+        run: terraform -chdir=./infrastructure validate
+      - name: Terraform init
+        run: terraform -chdir=./infrastructure/environments/staging init -input=false
+      - name: Terraform plan
+        run: terraform -chdir=./infrastructure/environments/staging plan -input=false
+      - name: Terraform apply
+        run: terraform -chdir=./infrastructure/environments/staging apply -input=false -auto-approve
