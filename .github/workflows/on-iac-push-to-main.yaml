@@ -37,8 +37,8 @@ jobs:
       - name: Terraform validate
         run: terraform -chdir=./infrastructure validate
       - name: Terraform init
-        run: terraform -chdir=./infrastructure/environments/production init -input=false
+        run: terraform -chdir=./infrastructure/environments/prod init -input=false
       - name: Terraform plan
-        run: terraform -chdir=./infrastructure/environments/production plan -input=false
+        run: terraform -chdir=./infrastructure/environments/prod plan -input=false
       - name: Terraform apply
-        run: terraform -chdir=./infrastructure/environments/production apply -input=false -auto-approve
+        run: terraform -chdir=./infrastructure/environments/prod apply -input=false -auto-approve
