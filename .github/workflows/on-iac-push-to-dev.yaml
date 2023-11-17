@@ -21,6 +21,9 @@ jobs:
 # ===================================================================================== #
   terraform-staging-infrastructure:
     runs-on: ubuntu-latest
+    environment: staging
+    permissions:
+      id-token: write # This is required for requesting the JWT
     steps:
       - uses: actions/checkout@v3
       - uses: hashicorp/setup-terraform@v2
