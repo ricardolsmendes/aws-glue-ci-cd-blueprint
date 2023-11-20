@@ -4,6 +4,7 @@
 # This workflow will:                                                                   #
 #   1. Install dependencies, run tests and style checks with a variety of Python        #
 #      versions.                                                                        #
+#   2. Copy the Glue scripts to an appropriate S3 bucket.                               #
 # ===================================================================================== #
 
 name: on PR against [dev]
@@ -64,4 +65,4 @@ jobs:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/AWSGlueCICDBlueprintGitHubActionsServiceRole
           aws-region: ${{ vars.AWS_REGION }}
       - name: Copy Glue scripts to S3
-        run: aws s3 cp src/ s3://${ vars.GLUE_SCRIPTS_S3_BUCKET }
+        run: aws s3 cp src/ s3://${{ vars.GLUE_SCRIPTS_S3_BUCKET }}

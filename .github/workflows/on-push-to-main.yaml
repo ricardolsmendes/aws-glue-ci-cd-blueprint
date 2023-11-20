@@ -3,6 +3,7 @@
 #                                                                                       #
 # This workflow will:                                                                   #
 #   1. Install dependencies, run tests and style checks with Python 3.10.               #                                                                        #
+#   2. Copy the Glue scripts to an appropriate S3 bucket.                               #
 # ===================================================================================== #
 
 name: on PUSH to [main]
@@ -18,6 +19,7 @@ jobs:
 #                             PYTHON TESTS AND STYLE CHECKS                             #
 # ===================================================================================== #
   python-test-and-style-check:
+    environment: production
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
