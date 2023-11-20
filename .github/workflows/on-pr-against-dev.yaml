@@ -54,7 +54,6 @@ jobs:
     environment: quality-assurance
     needs: python-test-and-style-check
     runs-on: ubuntu-latest
-    container: amazon/aws-cli:2.13.37
     permissions:
       id-token: write # This is required for requesting the JWT
     steps:
