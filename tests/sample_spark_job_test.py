@@ -2,21 +2,21 @@ import sys
 import unittest
 from unittest import mock
 
-from spark import sample_job
+import sample_spark_job
 
 
-class SampleJobTest(unittest.TestCase):
-    _SAMPLE_JOB_MODULE = "spark.sample_job"
-    _SAMPLE_JOB_CLASS = f"{_SAMPLE_JOB_MODULE}.SampleJob"
+class SampleSparkJobTest(unittest.TestCase):
+    _JOB_MODULE = "sample_spark_job"
+    _JOB_CLASS = f"{_JOB_MODULE}.SampleSparkJob"
 
-    @mock.patch(f"{_SAMPLE_JOB_MODULE}.job.Job", mock.MagicMock())
-    @mock.patch(f"{_SAMPLE_JOB_MODULE}.context.GlueContext", mock.MagicMock())
+    @mock.patch(f"{_JOB_MODULE}.job.Job", mock.MagicMock())
+    @mock.patch(f"{_JOB_MODULE}.context.GlueContext", mock.MagicMock())
     @mock.patch(
-        f"{_SAMPLE_JOB_MODULE}.spark_context.SparkContext.getOrCreate", mock.MagicMock()
+        f"{_JOB_MODULE}.spark_context.SparkContext.getOrCreate", mock.MagicMock()
     )
     @mock.patch.object(sys, "argv", ["", "--JOB_NAME", "sampleJobTest"])
     def setUp(self) -> None:
-        self._sample_job = sample_job.SampleJob()
+        self._sample_job = sample_spark_job.SampleSparkJob()
 
     def test_constructor_sets_instance_attributes(self):
         attrs = self._sample_job.__dict__
@@ -44,7 +44,7 @@ class SampleJobTest(unittest.TestCase):
             },
         )
 
-    @mock.patch(f"{_SAMPLE_JOB_CLASS}._read_json")
+    @mock.patch(f"{_JOB_CLASS}._read_json")
     def test_run_reads_json_and_commits_glue_job(self, mock_read_json):
         attrs = self._sample_job.__dict__
         mock_glue_job = attrs["_glue_job"]
