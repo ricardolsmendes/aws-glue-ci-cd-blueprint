@@ -47,3 +47,22 @@ jobs:
         run: black --check ./src ./tests
       - name: Run Flake8 linter
         run: flake8 ./src ./tests
+
+# ===================================================================================== #
+#                                 GLUE JOBS DEPLOYMENT                                  #
+# ===================================================================================== #
+  glue-jobs-deployment:
+    environment: quality-assurance
+    needs: python-test-and-style-check
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write # This is required for requesting the JWT
+    steps:
+      - uses: actions/checkout@v3
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/AWSGlueCICDBlueprintGitHubActionsServiceRole
+          aws-region: ${{ vars.AWS_REGION }}
+      - name: Copy Glue scripts to S3
+        run: aws s3 cp ./src s3://${{ vars.GLUE_SCRIPTS_S3_BUCKET }} --exclude "*" --include "*.py" --recursive
