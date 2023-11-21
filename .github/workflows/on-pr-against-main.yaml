@@ -12,7 +12,9 @@ name: on PR against [main]
 on:
   pull_request:
     branches: [main]
-    paths-ignore: ["infrastructure/**"]
+    paths-ignore:
+      - ".github/workflows/on-iac-*.yaml"
+      - "infrastructure/**"
 
 jobs:
 
