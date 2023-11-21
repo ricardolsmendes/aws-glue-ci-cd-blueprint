@@ -76,4 +76,4 @@ jobs:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/AWSGlueCICDBlueprintGitHubActionsServiceRole
           aws-region: ${{ vars.AWS_REGION }}
       - name: Copy Glue scripts to S3
-        run: aws s3 cp ./src s3://${{ vars.GLUE_SCRIPTS_S3_BUCKET }} --exclude "*" --include "*.py" --recursive
+        run: aws s3 sync ./src s3://${{ vars.GLUE_SCRIPTS_S3_BUCKET }}
