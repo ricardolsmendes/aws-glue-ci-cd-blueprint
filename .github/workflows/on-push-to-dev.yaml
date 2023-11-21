@@ -12,8 +12,8 @@ on:
   push:
     branches: [dev]
     paths-ignore:
+      - ".github/workflows/on-iac-*.yaml"
       - "infrastructure/**"
-      - '.github/workflows/on-iac-*.yaml'
 
 jobs:
 

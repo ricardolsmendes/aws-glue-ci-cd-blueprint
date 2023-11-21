@@ -13,8 +13,8 @@ on:
   pull_request:
     branches: [main]
     paths-ignore:
+      - ".github/workflows/on-iac-*.yaml"
       - "infrastructure/**"
-      - '.github/workflows/on-iac-*.yaml'
 
 jobs:
 
