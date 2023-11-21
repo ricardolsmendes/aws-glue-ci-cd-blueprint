@@ -2,21 +2,21 @@ import sys
 import unittest
 from unittest import mock
 
-import sample_spark_job
+import sample_landing_job
 
 
-class SampleSparkJobTest(unittest.TestCase):
-    _JOB_MODULE = "sample_spark_job"
-    _JOB_CLASS = f"{_JOB_MODULE}.SampleSparkJob"
+class SampleJobLandingTest(unittest.TestCase):
+    _JOB_MODULE = "sample_landing_job"
+    _JOB_CLASS = f"{_JOB_MODULE}.SampleLandingJob"
 
     @mock.patch(f"{_JOB_MODULE}.job.Job", mock.MagicMock())
     @mock.patch(f"{_JOB_MODULE}.context.GlueContext", mock.MagicMock())
     @mock.patch(
         f"{_JOB_MODULE}.spark_context.SparkContext.getOrCreate", mock.MagicMock()
     )
-    @mock.patch.object(sys, "argv", ["", "--JOB_NAME", "sampleJobTest"])
+    @mock.patch.object(sys, "argv", ["", "--JOB_NAME", "landingJobTest"])
     def setUp(self) -> None:
-        self._sample_job = sample_spark_job.SampleSparkJob()
+        self._sample_job = sample_landing_job.SampleLandingJob()
 
     def test_constructor_sets_instance_attributes(self):
         attrs = self._sample_job.__dict__
@@ -28,7 +28,7 @@ class SampleSparkJobTest(unittest.TestCase):
         mock_glue_job = attrs["_glue_job"]
 
         mock_glue_job.init.assert_called_once_with(
-            "sampleJobTest",
+            "landingJobTest",
             {
                 "job_bookmark_option": "job-bookmark-disable",
                 "job_bookmark_from": None,
@@ -40,7 +40,7 @@ class SampleSparkJobTest(unittest.TestCase):
                 "enable_data_lineage": None,
                 "RedshiftTempDir": None,
                 "TempDir": None,
-                "JOB_NAME": "sampleJobTest",
+                "JOB_NAME": "landingJobTest",
             },
         )
 

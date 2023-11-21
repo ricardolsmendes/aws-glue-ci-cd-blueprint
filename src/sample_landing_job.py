@@ -5,7 +5,7 @@ from awsglue import context, job, utils
 from pyspark import context as spark_context
 
 
-class SampleSparkJob:
+class SampleLandingJob:
     def __init__(self):
         # @params: [JOB_NAME]
         args = utils.getResolvedOptions(sys.argv, ["JOB_NAME"])
@@ -29,4 +29,4 @@ class SampleSparkJob:
 
 
 if __name__ == "__main__":
-    SampleSparkJob().run()
+    SampleLandingJob().run()
