@@ -11,7 +11,9 @@ name: on PUSH to [main]
 on:
   push:
     branches: [main]
-    paths-ignore: ["infrastructure/**"]
+    paths-ignore:
+      - "infrastructure/**"
+      - '.github/workflows/on-iac-*.yaml'
 
 jobs:
 

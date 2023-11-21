@@ -12,7 +12,7 @@ on:
     branches: [main]
     paths:
       - "infrastructure/**"
-      - '.github/workflows/**'
+      - '.github/workflows/on-iac-*.yaml'
 
 jobs:
 
