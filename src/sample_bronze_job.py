@@ -1,31 +1,59 @@
 import sys
-from typing import Any
 
-from awsglue import context, job, utils
-from pyspark import context as spark_context
+from awsglue import utils
+import boto3
 
 
 class SampleBronzeJob:
-    def __init__(self):
-        # @params: [JOB_NAME]
-        args = utils.getResolvedOptions(sys.argv, ["JOB_NAME"])
+    """
+    Copies a file from a public S3 bucket to the data lake's landing zone.
 
-        self._glue_context = context.GlueContext(
-            spark_context.SparkContext.getOrCreate()
+    Job parameters:
+      source-bucket-name: The source bucket name.
+      source-file-path: The source file path.
+      target-bucket-name: The target bucket name.
+      target-file-path: The target file path.
+    """
+
+    def __init__(self):
+        args = utils.getResolvedOptions(
+            sys.argv,
+            [
+                "source-bucket-name",
+                "source-file-path",
+                "target-bucket-name",
+                "target-file-path",
+            ],
         )
-        self._glue_job = job.Job(self._glue_context)
-        self._glue_job.init(args["JOB_NAME"], args)
+
+        self._source_bucket_name = args["source_bucket_name"]
+        self._source_file_path = args["source_file_path"]
+        self._target_bucket_name = args["target_bucket_name"]
+        self._target_file_path = args["target_file_path"]
 
     def run(self) -> None:
-        self._read_json("TBD")  # TODO: Read S3 path from the job parameters.
-        self._glue_job.commit()
-
-    def _read_json(self, path) -> Any:
-        return self._glue_context.create_dynamic_frame.from_options(
-            connection_type="s3",
-            connection_options={"paths": [path], "recurse": True},
-            format="json",
+        self._copy_file(
+            self._source_bucket_name,
+            self._source_file_path,
+            self._target_bucket_name,
+            self._target_file_path,
         )
+
+    @classmethod
+    def _copy_file(
+        cls,
+        source_bucket_name: str,
+        source_file_path: str,
+        target_bucket_name: str,
+        target_file_path: str,
+    ) -> None:
+        session = boto3.Session()
+        s3 = session.resource("s3")
+
+        source = {"Bucket": source_bucket_name, "Key": source_file_path}
+        target_bucket = s3.Bucket(target_bucket_name)
+
+        target_bucket.copy(source, target_file_path)
 
 
 if __name__ == "__main__":
