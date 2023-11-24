@@ -1,13 +1,15 @@
 data "aws_iam_policy_document" "glue_service_custom_policy" {
   statement {
-    effect    = "Allow"
-    actions   = ["s3:GetObject"]
-    resources = [aws_s3_bucket.glue_scripts.arn]
+    effect = "Allow"
+    actions = [
+      "s3:GetObject",
+      "s3:ListBucket"
+    ]
+    resources = ["*"]
   }
   statement {
     effect = "Allow"
     actions = [
-      "s3:GetObject",
       "s3:PutObject"
     ]
     resources = [
