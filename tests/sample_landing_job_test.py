@@ -9,59 +9,58 @@ class SampleJobLandingTest(unittest.TestCase):
     _JOB_MODULE = "sample_landing_job"
     _JOB_CLASS = f"{_JOB_MODULE}.SampleLandingJob"
 
-    @mock.patch(f"{_JOB_MODULE}.job.Job", mock.MagicMock())
-    @mock.patch(f"{_JOB_MODULE}.context.GlueContext", mock.MagicMock())
-    @mock.patch(
-        f"{_JOB_MODULE}.spark_context.SparkContext.getOrCreate", mock.MagicMock()
+    @mock.patch.object(
+        sys,
+        "argv",
+        [
+            "",
+            "--source-bucket-name",
+            "source-bucket-test",
+            "--source-file-path",
+            "source-file.json",
+            "--target-bucket-name",
+            "target-bucket-test",
+            "--target-file-path",
+            "landing/target-file.json",
+        ],
     )
-    @mock.patch.object(sys, "argv", ["", "--JOB_NAME", "landingJobTest"])
     def setUp(self) -> None:
         self._sample_job = sample_landing_job.SampleLandingJob()
 
     def test_constructor_sets_instance_attributes(self):
         attrs = self._sample_job.__dict__
-        self.assertIsNotNone(attrs["_glue_context"])
-        self.assertIsNotNone(attrs["_glue_job"])
+        self.assertEqual("source-bucket-test", attrs["_source_bucket_name"])
+        self.assertEqual("source-file.json", attrs["_source_file_path"])
+        self.assertEqual("target-bucket-test", attrs["_target_bucket_name"])
+        self.assertEqual("landing/target-file.json", attrs["_target_file_path"])
 
-    def test_constructor_initializes_glue_job(self):
-        attrs = self._sample_job.__dict__
-        mock_glue_job = attrs["_glue_job"]
-
-        mock_glue_job.init.assert_called_once_with(
-            "landingJobTest",
-            {
-                "job_bookmark_option": "job-bookmark-disable",
-                "job_bookmark_from": None,
-                "job_bookmark_to": None,
-                "JOB_ID": None,
-                "JOB_RUN_ID": None,
-                "SECURITY_CONFIGURATION": None,
-                "encryption_type": None,
-                "enable_data_lineage": None,
-                "RedshiftTempDir": None,
-                "TempDir": None,
-                "JOB_NAME": "landingJobTest",
-            },
-        )
-
-    @mock.patch(f"{_JOB_CLASS}._read_json")
-    def test_run_reads_json_and_commits_glue_job(self, mock_read_json):
-        attrs = self._sample_job.__dict__
-        mock_glue_job = attrs["_glue_job"]
-
+    @mock.patch(f"{_JOB_CLASS}._copy_file")
+    def test_run_triggers_file_copying(self, mock_copy_file):
         self._sample_job.run()
 
-        mock_read_json.assert_called_once()
-        mock_glue_job.commit.assert_called_once_with()
+        mock_copy_file.assert_called_once_with(
+            "source-bucket-test",
+            "source-file.json",
+            "target-bucket-test",
+            "landing/target-file.json",
+        )
 
-    def test_read_json_reads_from_s3(self):
-        attrs = self._sample_job.__dict__
-        mock_glue_context = attrs["_glue_context"]
+    @mock.patch(f"{_JOB_MODULE}.boto3.Session")
+    def test_copy_file_copies_between_buckets(self, mock_session):
+        self._sample_job._copy_file(
+            "source-bucket-test",
+            "source-file.json",
+            "target-bucket-test",
+            "landing/target-file.json",
+        )
 
-        self._sample_job._read_json("s3://bucket/test.json")
+        s3 = mock_session.return_value.resource.return_value
+        target_bucket = s3.Bucket.return_value
 
-        mock_glue_context.create_dynamic_frame.from_options.assert_called_once_with(
-            connection_type="s3",
-            connection_options={"paths": ["s3://bucket/test.json"], "recurse": True},
-            format="json",
+        mock_session.assert_called_once_with()
+        mock_session.return_value.resource.assert_called_once_with("s3")
+        s3.Bucket.assert_called_once_with("target-bucket-test")
+        target_bucket.copy.assert_called_once_with(
+            {"Bucket": "source-bucket-test", "Key": "source-file.json"},
+            "landing/target-file.json",
         )
