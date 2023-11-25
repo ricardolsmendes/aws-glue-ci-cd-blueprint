@@ -4,6 +4,12 @@ variable "environment" {
   default     = "dev"
 }
 
+variable "data_bucket_id" {
+  description = "ID of the S3 bucket used to store data."
+  type        = string
+  default     = ""
+}
+
 variable "glue_scripts_bucket_id" {
   description = "ID of the S3 bucket used to store AWS Glue scripts."
   type        = string
@@ -16,8 +22,14 @@ variable "glue_service_role_id" {
   default     = ""
 }
 
-variable "sample_spark_job_name" {
-  description = "Name of the Glue job used to demonstrate Spark features."
+variable "sample_bronze_job_name" {
+  description = "Name of the Glue job used to demonstrate data ingestion into the Bronze layer."
   type        = string
-  default     = "aws-glue-ci-cd-blueprint-sample-spark-job"
+  default     = ""
+}
+
+variable "sample_silver_job_name" {
+  description = "Name of the Glue job used to demonstrate data ingestion into the Silver layer."
+  type        = string
+  default     = ""
 }
