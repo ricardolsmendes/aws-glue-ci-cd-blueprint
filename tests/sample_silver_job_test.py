@@ -65,9 +65,9 @@ class SampleSilverJobTest(unittest.TestCase):
             "source-file.json",
         )
 
-        reader = self._mock_glue_context.return_value.create_dynamic_frame.from_options
+        reader = self._mock_glue_context.return_value.create_dynamic_frame
 
-        reader.assert_called_once_with(
+        reader.from_options.assert_called_once_with(
             connection_type="s3",
             connection_options={
                 "paths": ["s3://source-bucket-test/source-file.json"],
@@ -83,9 +83,9 @@ class SampleSilverJobTest(unittest.TestCase):
             "target-table",
         )
 
-        writer = self._mock_glue_context.return_value.write_dynamic_frame.from_options
+        writer = self._mock_glue_context.return_value.write_dynamic_frame
 
-        writer.assert_called_once_with(
+        writer.from_options.assert_called_once_with(
             frame=None,
             connection_type="s3",
             connection_options={"path": "s3://target-bucket-test/target-table"},
