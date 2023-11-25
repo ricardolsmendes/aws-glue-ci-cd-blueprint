@@ -21,7 +21,7 @@ class SampleBronzeJobTest(unittest.TestCase):
             "--target-bucket-name",
             "target-bucket-test",
             "--target-file-path",
-            "landing/target-file.json",
+            "bronze/target-file.json",
         ],
     )
     def setUp(self) -> None:
@@ -32,7 +32,7 @@ class SampleBronzeJobTest(unittest.TestCase):
         self.assertEqual("source-bucket-test", attrs["_source_bucket_name"])
         self.assertEqual("source-file.json", attrs["_source_file_path"])
         self.assertEqual("target-bucket-test", attrs["_target_bucket_name"])
-        self.assertEqual("landing/target-file.json", attrs["_target_file_path"])
+        self.assertEqual("bronze/target-file.json", attrs["_target_file_path"])
 
     @mock.patch(f"{_JOB_CLASS}._copy_file")
     def test_run_triggers_file_copying(self, mock_copy_file):
@@ -42,7 +42,7 @@ class SampleBronzeJobTest(unittest.TestCase):
             "source-bucket-test",
             "source-file.json",
             "target-bucket-test",
-            "landing/target-file.json",
+            "bronze/target-file.json",
         )
 
     @mock.patch(f"{_JOB_MODULE}.boto3.Session")
@@ -51,16 +51,15 @@ class SampleBronzeJobTest(unittest.TestCase):
             "source-bucket-test",
             "source-file.json",
             "target-bucket-test",
-            "landing/target-file.json",
+            "bronze/target-file.json",
         )
 
         s3 = mock_session.return_value.resource.return_value
         target_bucket = s3.Bucket.return_value
 
         mock_session.assert_called_once_with()
-        mock_session.return_value.resource.assert_called_once_with("s3")
         s3.Bucket.assert_called_once_with("target-bucket-test")
         target_bucket.copy.assert_called_once_with(
             {"Bucket": "source-bucket-test", "Key": "source-file.json"},
-            "landing/target-file.json",
+            "bronze/target-file.json",
         )

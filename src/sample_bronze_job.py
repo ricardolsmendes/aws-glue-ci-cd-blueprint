@@ -6,7 +6,7 @@ import boto3
 
 class SampleBronzeJob:
     """
-    Copies a file from a public S3 bucket to the data lake's landing zone.
+    Copies a file from a public S3 bucket to the data lake's bronze logical layer.
 
     Job parameters:
       source-bucket-name: The source bucket name.
