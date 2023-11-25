@@ -11,7 +11,9 @@ module "pipelines" {
   source = "../../modules/pipelines"
 
   environment            = var.environment
+  data_bucket_id         = module.core.data_bucket_id
   glue_scripts_bucket_id = module.core.glue_scripts_bucket_id
   glue_service_role_id   = module.core.glue_service_role_id
-  sample_spark_job_name  = var.sample_spark_job_name
+  sample_bronze_job_name = var.sample_bronze_job_name
+  sample_silver_job_name = var.sample_silver_job_name
 }

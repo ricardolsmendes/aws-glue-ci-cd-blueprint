@@ -1,3 +1,7 @@
+output "data_bucket_id" {
+  value = aws_s3_bucket.data.id
+}
+
 output "glue_scripts_bucket_id" {
   value = aws_s3_bucket.glue_scripts.id
 }
