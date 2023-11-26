@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket = "aws-glue-ci-cd-blueprint-terraform"
+    bucket = "glue-ci-cd-terraform"
     key    = "state/dev.tfstate"
     region = "us-east-1"
   }

@@ -3,6 +3,7 @@ resource "aws_s3_bucket" "data" {
   tags = {
     Project     = "AWS Glue CI/CD Blueprint"
     Environment = var.environment
+    CreatedBy   = "Terraform"
   }
 }
 
@@ -11,6 +12,7 @@ resource "aws_s3_bucket" "glue_assets" {
   tags = {
     Project     = "AWS Glue CI/CD Blueprint"
     Environment = var.environment
+    CreatedBy   = "Terraform"
   }
 }
 
@@ -30,5 +32,6 @@ resource "aws_s3_bucket" "glue_scripts" {
   tags = {
     Project     = "AWS Glue CI/CD Blueprint"
     Environment = var.environment
+    CreatedBy   = "Terraform"
   }
 }
