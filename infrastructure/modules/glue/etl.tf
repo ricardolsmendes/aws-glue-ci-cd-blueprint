@@ -5,7 +5,7 @@ resource "aws_glue_job" "bronze_us_legislators" {
   glue_version      = "4.0"
   worker_type       = "G.1X"
   number_of_workers = 10
-  execution_class = "FLEX"
+  execution_class   = "FLEX"
   default_arguments = {
     "--source-bucket-name" = "awsglue-datasets",
     "--source-file-path"   = "examples/us-legislators/all/persons.json",
@@ -29,7 +29,7 @@ resource "aws_glue_job" "silver_us_legislators" {
   glue_version      = "4.0"
   worker_type       = "G.1X"
   number_of_workers = 10
-  execution_class = "FLEX"
+  execution_class   = "FLEX"
   default_arguments = {
     "--source-bucket-name" = var.data_bucket_id,
     "--source-file-path"   = "bronze/awsglue-datasets/us-legislators/all-persons.json",
