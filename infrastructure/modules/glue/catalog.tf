@@ -1,7 +1,7 @@
 resource "aws_glue_catalog_database" "silver" {
   name         = "glue_ci_cd_silver_${var.environment}"
   description  = "Database for the AWS Glue CI/CD Blueprint (Silver layer)"
-  location_uri = "${var.data_bucket_id}/silver"
+  location_uri = "s3://${var.data_bucket_id}/silver"
   tags = {
     Project     = "AWS Glue CI/CD Blueprint"
     Environment = var.environment
