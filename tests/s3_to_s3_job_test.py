@@ -2,12 +2,12 @@ import sys
 import unittest
 from unittest import mock
 
-import sample_bronze_job
+import s3_to_s3_job
 
 
-class SampleBronzeJobTest(unittest.TestCase):
-    _JOB_MODULE = "sample_bronze_job"
-    _JOB_CLASS = f"{_JOB_MODULE}.SampleBronzeJob"
+class S3ToS3JobTest(unittest.TestCase):
+    _JOB_MODULE = "s3_to_s3_job"
+    _JOB_CLASS = f"{_JOB_MODULE}.S3ToS3Job"
 
     @mock.patch.object(
         sys,
@@ -25,10 +25,10 @@ class SampleBronzeJobTest(unittest.TestCase):
         ],
     )
     def setUp(self) -> None:
-        self._sample_job = sample_bronze_job.SampleBronzeJob()
+        self._job = s3_to_s3_job.S3ToS3Job()
 
     def test_constructor_sets_instance_attributes(self):
-        attrs = self._sample_job.__dict__
+        attrs = self._job.__dict__
         self.assertEqual("source-bucket-test", attrs["_source_bucket_name"])
         self.assertEqual("source-file.json", attrs["_source_file_path"])
         self.assertEqual("target-bucket-test", attrs["_target_bucket_name"])
@@ -36,7 +36,7 @@ class SampleBronzeJobTest(unittest.TestCase):
 
     @mock.patch(f"{_JOB_CLASS}._copy_file")
     def test_run_triggers_file_copying(self, mock_copy_file):
-        self._sample_job.run()
+        self._job.run()
 
         mock_copy_file.assert_called_once_with(
             "source-bucket-test",
@@ -47,7 +47,7 @@ class SampleBronzeJobTest(unittest.TestCase):
 
     @mock.patch(f"{_JOB_MODULE}.boto3.Session")
     def test_copy_file_copies_between_buckets(self, mock_session):
-        self._sample_job._copy_file(
+        self._job._copy_file(
             "source-bucket-test",
             "source-file.json",
             "target-bucket-test",

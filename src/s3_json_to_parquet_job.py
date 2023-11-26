@@ -5,10 +5,10 @@ from awsglue import context, utils
 from pyspark import context as spark_context
 
 
-class SampleSilverJob:
+class S3JSONToParquetJob:
     """
-    Transforms a JSON file from the data lake's bronze logical layer into a Parquet table
-    in the silver layer.
+    Transforms a given JSON file into a Parquet table.
+    The source file and target table reside in S3.
 
     Job parameters:
       source-bucket-name: The source bucket name.
@@ -69,4 +69,4 @@ class SampleSilverJob:
 
 
 if __name__ == "__main__":
-    SampleSilverJob().run()
+    S3JSONToParquetJob().run()

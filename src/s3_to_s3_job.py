@@ -4,9 +4,9 @@ from awsglue import utils
 import boto3
 
 
-class SampleBronzeJob:
+class S3ToS3Job:
     """
-    Copies a file from a public S3 bucket to the data lake's bronze logical layer.
+    Copies a file from a given S3 bucket into another one.
 
     Job parameters:
       source-bucket-name: The source bucket name.
@@ -57,4 +57,4 @@ class SampleBronzeJob:
 
 
 if __name__ == "__main__":
-    SampleBronzeJob().run()
+    S3ToS3Job().run()

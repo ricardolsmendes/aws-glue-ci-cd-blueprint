@@ -2,12 +2,12 @@ import sys
 import unittest
 from unittest import mock
 
-import sample_silver_job
+import s3_json_to_parquet_job
 
 
-class SampleSilverJobTest(unittest.TestCase):
-    _JOB_MODULE = "sample_silver_job"
-    _JOB_CLASS = f"{_JOB_MODULE}.SampleSilverJob"
+class S3JSONToParquetJobTest(unittest.TestCase):
+    _JOB_MODULE = "s3_json_to_parquet_job"
+    _JOB_CLASS = f"{_JOB_MODULE}.S3JSONToParquetJob"
 
     @mock.patch(f"{_JOB_MODULE}.context.GlueContext")
     @mock.patch(
@@ -30,7 +30,7 @@ class SampleSilverJobTest(unittest.TestCase):
     )
     def setUp(self, mock_glue_context) -> None:
         self._mock_glue_context = mock_glue_context
-        self._sample_job = sample_silver_job.SampleSilverJob()
+        self._sample_job = s3_json_to_parquet_job.S3JSONToParquetJob()
 
     def test_constructor_sets_instance_attributes(self):
         attrs = self._sample_job.__dict__
@@ -41,7 +41,7 @@ class SampleSilverJobTest(unittest.TestCase):
 
     @mock.patch(f"{_JOB_CLASS}._write_parquet")
     @mock.patch(f"{_JOB_CLASS}._read_json")
-    def test_run_triggers_read_json_and_write_parquets(
+    def test_run_triggers_read_json_and_write_parquet(
         self, mock_read_json, mock_write_parquet
     ):
         self._sample_job.run()
