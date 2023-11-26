@@ -1,14 +1,6 @@
-data "aws_iam_role" "glue_service" {
-  name = var.glue_service_role_id
-}
-
-data "aws_s3_bucket" "glue_scripts" {
-  bucket = var.glue_scripts_bucket_id
-}
-
-resource "aws_glue_job" "sample_bronze_job" {
-  name              = "${var.sample_bronze_job_name}-${var.environment}"
-  description       = "Sample Bronze-layer job from the AWS Glue CI/CD Blueprint."
+resource "aws_glue_job" "us_legislators_bronze_job" {
+  name              = "aws-glue-ci-cd-blueprint-bronze-job-${var.environment}"
+  description       = "Sample Bronze-layer job for the AWS Glue CI/CD Blueprint."
   glue_version      = "4.0"
   role_arn          = data.aws_iam_role.glue_service.arn
   worker_type       = "G.1X"
@@ -28,9 +20,9 @@ resource "aws_glue_job" "sample_bronze_job" {
   }
 }
 
-resource "aws_glue_job" "sample_silver_job" {
-  name              = "${var.sample_silver_job_name}-${var.environment}"
-  description       = "Sample Silver-layer job from the AWS Glue CI/CD Blueprint."
+resource "aws_glue_job" "us_legislators_silver_job" {
+  name              = "aws-glue-ci-cd-blueprint-silver-job-${var.environment}"
+  description       = "Sample Silver-layer job for the AWS Glue CI/CD Blueprint."
   glue_version      = "4.0"
   role_arn          = data.aws_iam_role.glue_service.arn
   worker_type       = "G.1X"
