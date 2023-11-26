@@ -7,13 +7,11 @@ module "core" {
   glue_scripts_bucket_name = var.glue_scripts_bucket_name
 }
 
-module "pipelines" {
-  source = "../../modules/pipelines"
+module "glue" {
+  source = "../../modules/glue"
 
   environment            = var.environment
   data_bucket_id         = module.core.data_bucket_id
   glue_scripts_bucket_id = module.core.glue_scripts_bucket_id
   glue_service_role_id   = module.core.glue_service_role_id
-  sample_bronze_job_name = var.sample_bronze_job_name
-  sample_silver_job_name = var.sample_silver_job_name
 }

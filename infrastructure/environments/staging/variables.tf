@@ -41,15 +41,3 @@ variable "glue_scripts_bucket_name" {
   type        = string
   default     = "aws-glue-ci-cd-blueprint-glue-scripts"
 }
-
-variable "sample_bronze_job_name" {
-  description = "Name of the Glue job used to demonstrate data ingestion into the Bronze layer."
-  type        = string
-  default     = "aws-glue-ci-cd-blueprint-bronze-job"
-}
-
-variable "sample_silver_job_name" {
-  description = "Name of the Glue job used to demonstrate data ingestion into the Silver layer."
-  type        = string
-  default     = "aws-glue-ci-cd-blueprint-silver-job"
-}

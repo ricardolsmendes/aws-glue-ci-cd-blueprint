@@ -21,15 +21,3 @@ variable "glue_service_role_id" {
   type        = string
   default     = ""
 }
-
-variable "sample_bronze_job_name" {
-  description = "Name of the Glue job used to demonstrate data ingestion into the Bronze layer."
-  type        = string
-  default     = ""
-}
-
-variable "sample_silver_job_name" {
-  description = "Name of the Glue job used to demonstrate data ingestion into the Silver layer."
-  type        = string
-  default     = ""
-}
