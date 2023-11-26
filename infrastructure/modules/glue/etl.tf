@@ -1,4 +1,4 @@
-resource "aws_glue_job" "us_legislators_bronze_job" {
+resource "aws_glue_job" "bronze_us_legislators" {
   name              = "aws-glue-ci-cd-blueprint-bronze-job-${var.environment}"
   description       = "Sample Bronze-layer job for the AWS Glue CI/CD Blueprint."
   glue_version      = "4.0"
@@ -20,7 +20,7 @@ resource "aws_glue_job" "us_legislators_bronze_job" {
   }
 }
 
-resource "aws_glue_job" "us_legislators_silver_job" {
+resource "aws_glue_job" "silver_us_legislators" {
   name              = "aws-glue-ci-cd-blueprint-silver-job-${var.environment}"
   description       = "Sample Silver-layer job for the AWS Glue CI/CD Blueprint."
   glue_version      = "4.0"
