@@ -7,7 +7,7 @@ variable "environment" {
 variable "default_tags" {
   description = "Default tags for the AWS resources."
   type        = map(string)
-  default     = {
+  default = {
     Project     = "AWS Glue CI/CD Blueprint"
     Environment = var.environment
     CreatedBy   = "Terraform"
