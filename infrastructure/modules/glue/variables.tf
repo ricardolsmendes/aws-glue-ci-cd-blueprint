@@ -4,6 +4,16 @@ variable "environment" {
   default     = "dev"
 }
 
+variable "default_tags" {
+  description = "Default tags for the AWS resources."
+  type        = map(string)
+  default     = {
+    Project     = "AWS Glue CI/CD Blueprint"
+    Environment = var.environment
+    CreatedBy   = "Terraform"
+  }
+}
+
 variable "data_bucket_id" {
   description = "ID of the S3 bucket used to store data."
   type        = string
