@@ -2,7 +2,7 @@ resource "aws_glue_catalog_database" "silver" {
   name         = "glue_ci_cd_silver_${var.environment}"
   description  = "Database for the AWS Glue CI/CD Blueprint (Silver layer)"
   location_uri = "s3://${var.data_bucket_id}/silver"
-  tags         = var.default_tags
+  tags         = local.default_tags
 }
 
 resource "aws_glue_crawler" "silver_us_legislators" {
@@ -10,7 +10,7 @@ resource "aws_glue_crawler" "silver_us_legislators" {
   description   = "Crawler for the US Legislators table (AWS Glue CI/CD Blueprint, Silver layer)"
   database_name = aws_glue_catalog_database.silver.name
   role          = data.aws_iam_role.glue_service.arn
-  tags          = var.default_tags
+  tags          = local.default_tags
   s3_target {
     path = "s3://${var.data_bucket_id}/silver/us-legislators"
   }

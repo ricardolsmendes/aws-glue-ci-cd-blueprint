@@ -12,7 +12,7 @@ resource "aws_glue_job" "bronze_us_legislators" {
     "--target-bucket-name" = var.data_bucket_id,
     "--target-file-path"   = "bronze/awsglue-datasets/us-legislators/all-persons.json",
   }
-  tags = var.default_tags
+  tags = local.default_tags
   command {
     script_location = "s3://${data.aws_s3_bucket.glue_scripts.id}/s3_to_s3_job.py"
   }
@@ -32,7 +32,7 @@ resource "aws_glue_job" "silver_us_legislators" {
     "--target-bucket-name" = var.data_bucket_id,
     "--target-table-path"  = "silver/us-legislators",
   }
-  tags = var.default_tags
+  tags = local.default_tags
   command {
     script_location = "s3://${data.aws_s3_bucket.glue_scripts.id}/s3_json_to_parquet_job.py"
   }
