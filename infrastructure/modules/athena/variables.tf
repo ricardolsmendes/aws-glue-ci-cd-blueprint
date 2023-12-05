@@ -30,7 +30,7 @@ variable "data_bucket_id" {
 }
 
 variable "silver_database_name" {
-  description = "Name of the Glue database used to store data in the Silver layer."
+  description = "Name of the Glue database used to catalog data in the Silver layer."
   type        = string
   default     = ""
 }
