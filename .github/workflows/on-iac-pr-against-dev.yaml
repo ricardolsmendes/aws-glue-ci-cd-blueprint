@@ -41,6 +41,8 @@ jobs:
       - name: Terraform init
         run: terraform -chdir=./infrastructure/environments/qa init -input=false
       - name: Terraform plan
-        run: terraform -chdir=./infrastructure/environments/qa plan -input=false
+        run: |
+          export TF_VAR_AWS_ACCOUNT_ID=${{ secrets.AWS_ACCOUNT_ID }}
+          terraform -chdir=./infrastructure/environments/qa plan -input=false
       - name: Terraform apply
         run: terraform -chdir=./infrastructure/environments/qa apply -input=false -auto-approve
