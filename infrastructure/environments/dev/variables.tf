@@ -12,6 +12,13 @@ variable "aws_secret_key" {
   sensitive   = true
 }
 
+variable "aws_account_id" {
+  description = "The AWS account id."
+  type        = string
+  default     = ""
+  sensitive   = true
+}
+
 variable "aws_region" {
   description = "The AWS region."
   type        = string
@@ -40,4 +47,10 @@ variable "glue_scripts_bucket_name" {
   description = "Name of the S3 bucket used to store AWS Glue scripts."
   type        = string
   default     = "glue-ci-cd-scripts"
+}
+
+variable "athena_query_results_bucket_name" {
+  description = "Name of the S3 bucket used to store Athena query results."
+  type        = string
+  default     = "glue-ci-cd-athena-query-results"
 }
