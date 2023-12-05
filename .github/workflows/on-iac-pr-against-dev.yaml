@@ -31,8 +31,6 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/GlueCICDGitHubActionsServiceRole
           aws-region: ${{ vars.AWS_REGION }}
-      - name: Set up environment variables
-        run: export TF_VAR_AWS_ACCOUNT_ID=${{ secrets.AWS_ACCOUNT_ID }}
       - uses: hashicorp/setup-terraform@v2
       - name: Terraform style check
         run: terraform fmt -check -recursive ./infrastructure
@@ -41,8 +39,6 @@ jobs:
       - name: Terraform init
         run: terraform -chdir=./infrastructure/environments/qa init -input=false
       - name: Terraform plan
-        run: |
-          export TF_VAR_AWS_ACCOUNT_ID=${{ secrets.AWS_ACCOUNT_ID }}
-          terraform -chdir=./infrastructure/environments/qa plan -input=false
+        run: terraform -chdir=./infrastructure/environments/qa plan -input=false
       - name: Terraform apply
         run: terraform -chdir=./infrastructure/environments/qa apply -input=false -auto-approve
