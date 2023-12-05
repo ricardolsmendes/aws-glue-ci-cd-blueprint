@@ -1,8 +1,8 @@
 module "core" {
   source = "../../modules/core"
 
-  environment              = var.environment
-  data_bucket_name         = var.data_bucket_name
+  environment      = var.environment
+  data_bucket_name = var.data_bucket_name
 }
 
 module "glue" {
