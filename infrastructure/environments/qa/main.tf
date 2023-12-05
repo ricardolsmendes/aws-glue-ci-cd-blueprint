@@ -15,3 +15,13 @@ module "glue" {
   glue_scripts_bucket_id = module.core.glue_scripts_bucket_id
   glue_service_role_id   = module.core.glue_service_role_id
 }
+
+module "athena" {
+  source = "../../modules/athena"
+
+  aws_region                       = var.aws_region
+  environment                      = var.environment
+  athena_query_results_bucket_name = var.athena_query_results_bucket_name
+  data_bucket_id                   = module.core.data_bucket_id
+  silver_database_name             = module.glue.silver_database_name
+}

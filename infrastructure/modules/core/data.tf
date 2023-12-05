@@ -1,4 +1,4 @@
-data "aws_iam_policy_document" "glue_service_custom_policy" {
+data "aws_iam_policy_document" "glue_service_custom" {
   statement {
     effect = "Allow"
     actions = [
@@ -19,7 +19,7 @@ data "aws_iam_policy_document" "glue_service_custom_policy" {
   }
 }
 
-data "aws_iam_policy_document" "glue_service_trust_policy" {
+data "aws_iam_policy_document" "glue_service_trust" {
   statement {
     effect  = "Allow"
     actions = ["sts:AssumeRole"]

@@ -41,3 +41,9 @@ variable "glue_scripts_bucket_name" {
   type        = string
   default     = "glue-ci-cd-scripts"
 }
+
+variable "athena_query_results_bucket_name" {
+  description = "Name of the S3 bucket used to store Athena query results."
+  type        = string
+  default     = "glue-ci-cd-athena-query-results"
+}

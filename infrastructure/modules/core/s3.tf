@@ -8,7 +8,7 @@ resource "aws_s3_bucket" "glue_assets" {
   tags   = local.default_tags
 }
 
-resource "aws_s3_bucket_lifecycle_configuration" "glue_assets_lifecycle" {
+resource "aws_s3_bucket_lifecycle_configuration" "glue_assets" {
   bucket = aws_s3_bucket.glue_assets.id
   rule {
     status = "Enabled"
