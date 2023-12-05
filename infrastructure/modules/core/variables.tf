@@ -9,15 +9,3 @@ variable "data_bucket_name" {
   type        = string
   default     = ""
 }
-
-variable "glue_assets_bucket_name" {
-  description = "Name of the S3 bucket used to store AWS Glue assets."
-  type        = string
-  default     = ""
-}
-
-variable "glue_scripts_bucket_name" {
-  description = "Name of the S3 bucket used to store AWS Glue scripts."
-  type        = string
-  default     = ""
-}
