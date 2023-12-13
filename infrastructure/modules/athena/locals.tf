@@ -4,5 +4,5 @@ locals {
     Environment = var.environment
     CreatedBy   = "Terraform"
   }
-  glue_resource_arn_prefix = "arn:aws:glue:${var.aws_region}:${data.aws_caller_identity.current.account_id}"
+  glue_resource_arn_prefix = "arn:aws:glue:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}"
 }
