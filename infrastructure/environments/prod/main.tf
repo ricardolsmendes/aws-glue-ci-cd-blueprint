@@ -17,7 +17,6 @@ module "glue" {
 module "athena" {
   source = "../../modules/athena"
 
-  aws_region                       = var.aws_region
   environment                      = var.environment
   athena_query_results_bucket_name = var.athena_query_results_bucket_name
   data_bucket_id                   = module.core.data_bucket_id
