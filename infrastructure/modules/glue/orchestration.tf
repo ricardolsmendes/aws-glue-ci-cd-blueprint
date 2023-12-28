@@ -10,7 +10,7 @@ resource "aws_glue_trigger" "bronze_us_legislators" {
   workflow_name = aws_glue_workflow.us_legislators.name
   tags          = local.default_tags
   actions {
-    job_name = aws_glue_job.bronze_us_legislators.name
+    job_name = aws_glue_job.us_legislators["bronze"].name
   }
 }
 
@@ -21,12 +21,12 @@ resource "aws_glue_trigger" "silver_us_legislators" {
   tags          = local.default_tags
   predicate {
     conditions {
-      job_name = aws_glue_job.bronze_us_legislators.name
+      job_name = aws_glue_job.us_legislators["bronze"].name
       state    = "SUCCEEDED"
     }
   }
   actions {
-    job_name = aws_glue_job.silver_us_legislators.name
+    job_name = aws_glue_job.us_legislators["silver"].name
   }
 }
 
@@ -37,7 +37,7 @@ resource "aws_glue_trigger" "silver_us_legislators_crawler" {
   tags          = local.default_tags
   predicate {
     conditions {
-      job_name = aws_glue_job.silver_us_legislators.name
+      job_name = aws_glue_job.us_legislators["silver"].name
       state    = "SUCCEEDED"
     }
   }
