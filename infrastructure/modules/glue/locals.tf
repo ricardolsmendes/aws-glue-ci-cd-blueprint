@@ -4,4 +4,13 @@ locals {
     Environment = var.environment
     CreatedBy   = "Terraform"
   }
+
+  buckets_map = {
+    assets = {
+      name = "${var.glue_assets_bucket_name}-${var.environment}"
+    },
+    scripts = {
+      name = "${var.glue_scripts_bucket_name}-${var.environment}"
+    }
+  }
 }

@@ -14,7 +14,7 @@ resource "aws_glue_job" "bronze_us_legislators" {
   }
   tags = local.default_tags
   command {
-    script_location = "s3://${aws_s3_bucket.glue_scripts.id}/s3_to_s3_job.py"
+    script_location = "s3://${aws_s3_bucket.glue["scripts"].id}/s3_to_s3_job.py"
   }
 }
 
@@ -34,6 +34,6 @@ resource "aws_glue_job" "silver_us_legislators" {
   }
   tags = local.default_tags
   command {
-    script_location = "s3://${aws_s3_bucket.glue_scripts.id}/s3_json_to_parquet_job.py"
+    script_location = "s3://${aws_s3_bucket.glue["scripts"].id}/s3_json_to_parquet_job.py"
   }
 }

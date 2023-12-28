@@ -1,10 +1,12 @@
-resource "aws_s3_bucket" "glue_assets" {
-  bucket = "${var.glue_assets_bucket_name}-${var.environment}"
+resource "aws_s3_bucket" "glue" {
+  for_each = local.buckets_map
+
+  bucket = each.value.name
   tags   = local.default_tags
 }
 
 resource "aws_s3_bucket_lifecycle_configuration" "glue_assets" {
-  bucket = aws_s3_bucket.glue_assets.id
+  bucket = aws_s3_bucket.glue["assets"].id
   rule {
     status = "Enabled"
     id     = "Delete after 30 days"
@@ -12,9 +14,4 @@ resource "aws_s3_bucket_lifecycle_configuration" "glue_assets" {
       days = 30
     }
   }
-}
-
-resource "aws_s3_bucket" "glue_scripts" {
-  bucket = "${var.glue_scripts_bucket_name}-${var.environment}"
-  tags   = local.default_tags
 }
