@@ -18,7 +18,7 @@ data "aws_iam_policy_document" "glue_service_custom" {
     ]
     resources = [
       "${data.aws_s3_bucket.data.arn}/*",
-      "${aws_s3_bucket.glue_assets.arn}/*"
+      "${aws_s3_bucket.glue["assets"].arn}/*"
     ]
   }
 }
