@@ -17,7 +17,7 @@ resource "aws_iam_role_policy_attachment" "glue_service_custom" {
   policy_arn = aws_iam_policy.glue_service_custom.arn
 }
 
-resource "aws_iam_role_policy_attachment" "glue_service_managed" {
+resource "aws_iam_role_policy_attachment" "glue_service_trust" {
   role       = aws_iam_role.glue_service.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSGlueServiceRole"
 }
