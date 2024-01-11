@@ -16,7 +16,7 @@ locals {
 
   us_legislators_jobs_map = {
     bronze = {
-      name        = "glue-ci-cd-bronze-us-legislators-${var.environment}"
+      name        = "glue-ci-cd-us-legislators-bronze-${var.environment}"
       description = "Sample Bronze-layer job for the AWS Glue CI/CD Blueprint."
       default_arguments = {
         "--source-bucket-name" = "awsglue-datasets",
@@ -27,7 +27,7 @@ locals {
       script_location = "s3://${aws_s3_bucket.glue["scripts"].id}/s3_to_s3_job.py"
     },
     silver = {
-      name        = "glue-ci-cd-silver-us-legislators-${var.environment}"
+      name        = "glue-ci-cd-us-legislators-silver-${var.environment}"
       description = "Sample Silver-layer job for the AWS Glue CI/CD Blueprint."
       default_arguments = {
         "--source-bucket-name" = var.data_bucket_id,
