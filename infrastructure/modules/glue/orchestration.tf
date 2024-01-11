@@ -4,7 +4,7 @@ resource "aws_glue_workflow" "us_legislators" {
   tags        = local.default_tags
 }
 
-resource "aws_glue_trigger" "bronze_us_legislators" {
+resource "aws_glue_trigger" "us_legislators_bronze" {
   name          = "us-legislators-bronze-${var.environment}"
   type          = "ON_DEMAND"
   workflow_name = aws_glue_workflow.us_legislators.name
@@ -14,7 +14,7 @@ resource "aws_glue_trigger" "bronze_us_legislators" {
   }
 }
 
-resource "aws_glue_trigger" "silver_us_legislators" {
+resource "aws_glue_trigger" "us_legislators_silver" {
   name          = "us-legislators-silver-${var.environment}"
   type          = "CONDITIONAL"
   workflow_name = aws_glue_workflow.us_legislators.name
@@ -30,7 +30,7 @@ resource "aws_glue_trigger" "silver_us_legislators" {
   }
 }
 
-resource "aws_glue_trigger" "silver_us_legislators_crawler" {
+resource "aws_glue_trigger" "us_legislators_silver_crawler" {
   name          = "us-legislators-silver-crawler-${var.environment}"
   type          = "CONDITIONAL"
   workflow_name = aws_glue_workflow.us_legislators.name
