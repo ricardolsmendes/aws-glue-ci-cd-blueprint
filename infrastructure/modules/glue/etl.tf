@@ -9,7 +9,7 @@ resource "aws_glue_job" "us_legislators" {
   number_of_workers = 2
   execution_class   = "FLEX"
   default_arguments = each.value.default_arguments
-  tags              = local.default_tags
+
   command {
     script_location = each.value.script_location
   }
