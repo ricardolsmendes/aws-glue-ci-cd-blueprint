@@ -39,30 +39,44 @@ data "aws_iam_policy_document" "athena_query_results_management" {
   }
 }
 
-data "aws_iam_policy_document" "silver_layer_access" {
+data "aws_iam_policy_document" "athena_metadata_read_access" {
+  statement {
+    effect = "Allow"
+    actions = [
+      "athena:ListDataCatalogs"
+    ]
+    resources = [
+      "*"
+    ]
+  }
+}
+
+data "aws_iam_policy_document" "glue_catalog_read_access" {
   statement {
     effect = "Allow"
     actions = [
       "glue:GetDatabase",
-      "glue:GetDatabases"
+      "glue:GetDatabases",
+      "glue:GetTable",
+      "glue:GetTables"
     ]
     resources = [
       "${local.glue_resource_arn_prefix}:catalog",
       "${local.glue_resource_arn_prefix}:database/*"
     ]
   }
+}
+
+data "aws_iam_policy_document" "silver_tables_read_access" {
   statement {
     effect = "Allow"
     actions = [
-      "glue:GetDatabase",
       "glue:GetTable",
       "glue:GetTables",
       "glue:GetPartition",
       "glue:GetPartitions"
     ]
     resources = [
-      "${local.glue_resource_arn_prefix}:catalog",
-      "${local.glue_resource_arn_prefix}:database/${var.silver_database_name}",
       "${local.glue_resource_arn_prefix}:table/${var.silver_database_name}/*"
     ]
   }
