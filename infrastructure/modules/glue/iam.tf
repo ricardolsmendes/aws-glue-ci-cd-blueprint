@@ -4,18 +4,18 @@ resource "aws_iam_policy" "glue_service_custom" {
   policy      = data.aws_iam_policy_document.glue_service_custom.json
 }
 
-resource "aws_iam_role" "glue_service" {
+resource "aws_iam_role" "glue_service_custom" {
   name               = "GlueCICDServiceRole-${var.environment}"
   description        = "Role assumed by the Glue services to demonstrate the CI/CD Blueprint."
   assume_role_policy = data.aws_iam_policy_document.glue_service_trust.json
 }
 
 resource "aws_iam_role_policy_attachment" "glue_service_custom" {
-  role       = aws_iam_role.glue_service.name
+  role       = aws_iam_role.glue_service_custom.name
   policy_arn = aws_iam_policy.glue_service_custom.arn
 }
 
-resource "aws_iam_role_policy_attachment" "glue_service_trust" {
-  role       = aws_iam_role.glue_service.name
+resource "aws_iam_role_policy_attachment" "glue_service_managed" {
+  role       = aws_iam_role.glue_service_custom.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSGlueServiceRole"
 }
