@@ -8,7 +8,7 @@ resource "aws_glue_crawler" "silver_us_legislators" {
   name          = "glue-ci-cd-silver-us-legislators-${var.environment}"
   description   = "Crawler for the US Legislators table (AWS Glue CI/CD Blueprint, Silver layer)"
   database_name = aws_glue_catalog_database.silver.name
-  role          = aws_iam_role.glue_service.arn
+  role          = aws_iam_role.glue_service_custom.arn
 
   s3_target {
     path = "s3://${var.data_bucket_id}/silver/us-legislators"
