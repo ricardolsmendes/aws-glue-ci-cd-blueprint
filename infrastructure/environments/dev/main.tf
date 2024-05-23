@@ -10,6 +10,7 @@ module "glue" {
 
   environment              = var.environment
   data_bucket_id           = module.core.data_bucket_id
+  s3_encryption_key_arn    = module.core.s3_encryption_key_arn
   glue_assets_bucket_name  = var.glue_assets_bucket_name
   glue_scripts_bucket_name = var.glue_scripts_bucket_name
 }
