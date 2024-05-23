@@ -6,6 +6,16 @@ data "aws_iam_policy_document" "glue_service_custom" {
   statement {
     effect = "Allow"
     actions = [
+      "kms:Decrypt",
+      "kms:GenerateDataKey"
+    ]
+    resources = [
+      var.s3_encryption_key_arn
+    ]
+  }
+  statement {
+    effect = "Allow"
+    actions = [
       "s3:GetObject",
       "s3:ListBucket"
     ]
