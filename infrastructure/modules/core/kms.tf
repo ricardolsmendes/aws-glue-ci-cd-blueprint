@@ -7,7 +7,7 @@
 # https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingEncryption.html for further
 # details.
 resource "aws_kms_key" "s3" {
-  description         = "This key that protects S3 objects tackled by the AWS Glue CI/CD Blueprint"
+  description         = "This key protects S3 objects tackled by the AWS Glue CI/CD Blueprint"
   enable_key_rotation = true
 }
 
