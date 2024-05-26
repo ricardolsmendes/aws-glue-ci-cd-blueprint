@@ -3,16 +3,19 @@ data "aws_s3_bucket" "data" {
 }
 
 data "aws_iam_policy_document" "glue_service_custom" {
-  statement {
-    effect = "Allow"
-    actions = [
-      "kms:Decrypt",
-      "kms:GenerateDataKey"
-    ]
-    resources = [
-      var.s3_encryption_key_arn
-    ]
-  }
+  # =====================================================================================
+  # DELETE THIS AND UNCOMMENT THE FOLLOWING STATEMENT TO ENABLE SSE-KMS ENCRYPTION IN S3.
+  # =====================================================================================
+  # statement {
+  #   effect = "Allow"
+  #   actions = [
+  #     "kms:Decrypt",
+  #     "kms:GenerateDataKey"
+  #   ]
+  #   resources = [
+  #     var.s3_encryption_key_arn
+  #   ]
+  # }
   statement {
     effect = "Allow"
     actions = [
