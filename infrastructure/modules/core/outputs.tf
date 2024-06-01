@@ -3,7 +3,7 @@ output "data_bucket_id" {
 }
 
 # =======================================================================================
-# KMS KEY ARE DISABLED BY DEFAULT. PLEASE REFER TO `kms.tf` FOR DETAILS.
+# THE KMS KEY IS NOT CREATED BY DEFAULT. PLEASE REFER TO `kms.tf` FOR DETAILS.
 # =======================================================================================
 # output "s3_encryption_key_arn" {
 #   value = aws_kms_key.s3.arn

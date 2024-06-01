@@ -3,7 +3,7 @@ resource "aws_s3_bucket" "data" {
 }
 
 # =======================================================================================
-# KMS KEY ARE DISABLED BY DEFAULT. PLEASE REFER TO `kms.tf` FOR DETAILS.
+# THE KMS KEY IS NOT CREATED BY DEFAULT. PLEASE REFER TO `kms.tf` FOR DETAILS.
 # =======================================================================================
 # resource "aws_s3_bucket_server_side_encryption_configuration" "data" {
 #   bucket = aws_s3_bucket.data.id

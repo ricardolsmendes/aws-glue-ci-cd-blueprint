@@ -7,9 +7,9 @@
 # https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingEncryption.html for further
 # details.
 # =======================================================================================
-# THE KMS KEY IS DISABLED BY DEFAULT TO AVOID EXTRA COSTS IN THE BLUEPRINT VALIDATION
+# THE KMS KEY IS NOT CREATED BY DEFAULT TO AVOID EXTRA COSTS IN THE BLUEPRINT VALIDATION
 # ACCOUNTS. DELETE THE LINES DELIMITED BY `# =...=` AND UNCOMMENT THE FOLLOWING RESOURCES
-# TO CREATE/ENABLE THEM.
+# TO CREATE/ENABLE IT.
 # =======================================================================================
 # resource "aws_kms_key" "s3" {
 #  description         = "This key protects S3 objects tackled by the AWS Glue CI/CD Blueprint"
