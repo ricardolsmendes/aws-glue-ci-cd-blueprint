@@ -14,7 +14,7 @@ variable "data_bucket_id" {
 # DELETE THIS AND UNCOMMENT THE FOLLOWING VARIABLE TO ENABLE SSE-KMS ENCRYPTION IN S3.
 # =======================================================================================
 # variable "s3_encryption_key_arn" {
-#   description = "ARN of the key that protects S3 objects tackled by the AWS Glue CI/CD Blueprint."
+#   description = "ARN of the KMS key that protects S3 objects tackled by the AWS Glue CI/CD Blueprint."
 #   type        = string
 #   default     = ""
 # }
