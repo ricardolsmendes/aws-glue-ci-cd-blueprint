@@ -11,12 +11,12 @@
 # ACCOUNTS. DELETE THE LINES DELIMITED BY `# =...=` AND UNCOMMENT THE FOLLOWING RESOURCES
 # TO CREATE/ENABLE IT.
 # =======================================================================================
-# resource "aws_kms_key" "s3" {
-#  description         = "This key protects S3 objects tackled by the AWS Glue CI/CD Blueprint"
-#  enable_key_rotation = true
-# }
-#
-# resource "aws_kms_alias" "s3" {
-#  name          = "alias/glue-ci-cd-blueprint/s3-${var.environment}"
-#  target_key_id = aws_kms_key.s3.key_id
-# }
+resource "aws_kms_key" "s3" {
+  description         = "This key protects S3 objects tackled by the AWS Glue CI/CD Blueprint"
+  enable_key_rotation = true
+}
+
+resource "aws_kms_alias" "s3" {
+  name          = "alias/glue-ci-cd-blueprint/s3-${var.environment}"
+  target_key_id = aws_kms_key.s3.key_id
+}
