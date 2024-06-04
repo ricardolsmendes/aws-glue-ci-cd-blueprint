@@ -13,7 +13,7 @@ data "aws_iam_policy_document" "glue_service_custom" {
   #     "kms:GenerateDataKey"
   #   ]
   #   resources = [
-  #     var.s3_encryption_key_arn
+  #     var.s3_data_encryption_key_arn
   #   ]
   # }
   statement {
