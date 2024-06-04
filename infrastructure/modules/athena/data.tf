@@ -21,6 +21,21 @@ data "aws_iam_policy_document" "athena_query_results_management" {
       "*"
     ]
   }
+  # =====================================================================================
+  # DELETE THIS AND UNCOMMENT THE FOLLOWING STATEMENT TO ENABLE SSE-KMS ENCRYPTION IN
+  # ATHENA AND S3.
+  # =====================================================================================
+  # statement {
+  #   effect = "Allow"
+  #   actions = [
+  #     "kms:Decrypt",
+  #     "kms:GenerateDataKey"
+  #   ]
+  #   resources = [
+  #     aws_kms_key.athena_query_results.arn,
+  #     var.s3_data_encryption_key_arn
+  #   ]
+  # }
   statement {
     effect = "Allow"
     actions = [
