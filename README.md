@@ -15,6 +15,8 @@ jobs in [AWS Glue](https://aws.amazon.com/glue/).
 
 ## 1. Overview
 
+![N|Solid](img/glue-ci-cd-blueprint-overview.png "Overview of the AWS Glue CI/CD Blueprint")
+
 ### 1.1. Continuous Integration / Continuous Delivery
 
 - [GitHub Actions](https://github.com/ricardolsmendes/aws-glue-ci-cd-blueprint/blob/main/.github/workflows)
