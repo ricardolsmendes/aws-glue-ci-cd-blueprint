@@ -1,7 +1,7 @@
 # AWS Glue CI/CD Blueprint
 
 This is the companion repository for the [Streamlining AWS Glue CI/CD — A Comprehensive
-Blueprint](https://github.com/ricardolsmendes/aws-glue-ci-cd-blueprint) blog post. It
+Blueprint](https://blog.det.life/streamlining-aws-glue-ci-cd-298edda9e844) blog post. It
 contains a reference CI/CD pipeline for building, testing, and deploying data processing
 jobs in [AWS Glue](https://aws.amazon.com/glue/).
 
