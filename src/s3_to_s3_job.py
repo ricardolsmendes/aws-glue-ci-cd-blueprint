@@ -1,7 +1,7 @@
 import sys
 
-from awsglue import utils
 import boto3
+from awsglue import utils
 
 
 class S3ToS3Job:
