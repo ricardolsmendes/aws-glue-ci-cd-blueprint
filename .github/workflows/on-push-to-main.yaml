@@ -42,6 +42,8 @@ jobs:
         run: pytest | tee ./pytest-coverage.txt
       - name: Run Black style check on source code
         run: black --check ./src ./tests
+      - name: Run isort import organizer on source code
+        run: isort --check --profile black ./src ./tests
       - name: Run Flake8 linter
         run: flake8 ./src ./tests
       - name: Generate unit test coverage report
