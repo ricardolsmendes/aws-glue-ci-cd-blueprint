@@ -40,11 +40,11 @@ jobs:
       - name: Run unit tests with pytest
         # pytest-coverage.txt is required to properly report coverage in README.md.
         run: pytest | tee ./pytest-coverage.txt
-      - name: Run Black style check on source code
-        run: black --check ./src ./tests
-      - name: Run isort import organizer on source code
+      - name: Run isort to check Python import order
         run: isort --check --profile black ./src ./tests
-      - name: Run Flake8 linter
+      - name: Run Black to check the Python code style and quality
+        run: black --check ./src ./tests
+      - name: Run Flake8 to check the Python code style and quality
         run: flake8 ./src ./tests
       - name: Generate unit test coverage report
         id: report-coverage

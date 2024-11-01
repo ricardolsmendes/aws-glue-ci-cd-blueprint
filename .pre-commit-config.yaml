@@ -15,14 +15,14 @@ repos:
     - id: mixed-line-ending
     - id: trailing-whitespace
       files: \.(py|rst|sh|yaml|yml)$
+- repo: https://github.com/PyCQA/isort
+  rev: 5.13.2
+  hooks:
+    - id: isort
 - repo: https://github.com/psf/black
   rev: 23.7.0
   hooks:
   - id: black
-- repo: https://github.com/pycqa/isort
-  rev: 5.13.2
-  hooks:
-    - id: isort
 - repo: https://github.com/PyCQA/flake8
   rev: 6.1.0
   hooks:
