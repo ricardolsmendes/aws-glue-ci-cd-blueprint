@@ -162,7 +162,3 @@ cython_debug/
 
 # macOS Desktop Services Store settings
 .DS_Store
-
-# Terraform
-.terraform/
-.terraform-plan.out
